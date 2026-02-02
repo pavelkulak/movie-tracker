@@ -1,14 +1,11 @@
-import { Box, SimpleGrid, Image, HStack, Text, RatingGroup } from "@chakra-ui/react";
-import { ArrowRightIcon } from "@/shared/ui/icons/";
+import { Box, Image, HStack, Text, RatingGroup } from "@chakra-ui/react";
 
 interface MovieCardProps {
     image: string;
-    popularity: number;
     vote_average: number;
-    vote_count: number;
 }
 
-export const MovieCard = ({ image, popularity, vote_average, vote_count }: MovieCardProps) => {
+export const MovieCard = ({ image, vote_average, }: MovieCardProps) => {
     return (
         <Box
             p={{ base: "20px", lg: "24px", xl: "30px" }}

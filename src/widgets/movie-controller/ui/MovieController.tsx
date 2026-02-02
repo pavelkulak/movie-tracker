@@ -13,7 +13,7 @@ export const MovieController = ({ type }: MovieControllerProps) => {
         now_playing: useNowPlayingMovies(),
     };
 
-    const { data, isLoading } = queryMap[type];
+    const { data } = queryMap[type];
     const movies = data?.results || [];
     return (
         <Carousel
@@ -23,8 +23,6 @@ export const MovieController = ({ type }: MovieControllerProps) => {
                     key={movie.id}
                     image={`${TMDB_IMAGE_BASE}${movie.poster_path}`}
                     vote_average={movie.vote_average}
-                    popularity={movie.popularity}
-                    vote_count={movie.vote_count}
                 />
             )}
         />

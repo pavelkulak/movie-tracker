@@ -1,4 +1,4 @@
-import { Accordion } from "@/shared/ui"
+
 
 export const Faq = () => {
     return (

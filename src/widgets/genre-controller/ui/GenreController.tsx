@@ -5,7 +5,7 @@ import { useGenresPosters } from "@/entities/genres/hooks";
 
 
 export const GenreController = ({ heading, subtitle }: { heading: string, subtitle: string }) => {
-    const { data, isLoading } = useGenresPosters();
+    const { data } = useGenresPosters();
 
     return (
         <Carousel
