@@ -6,7 +6,7 @@ interface MovieControllerProps {
     type: "popular" | "now_playing"
 
 }
-const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
+const TMDB_IMAGE_BASE = `${import.meta.env.VITE_TMDB_IMAGE_URL}/w500`;
 export const MovieController = ({ type }: MovieControllerProps) => {
     const queryMap = {
         popular: usePopularMovies(),

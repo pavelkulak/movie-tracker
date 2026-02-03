@@ -17,7 +17,7 @@ export const HeroPosters = () => {
       {posters?.slice(0, 36).map((path, index) => (
         <Box key={index} borderRadius="12px" overflow="hidden">
           <Image
-            src={`https://image.tmdb.org/t/p/w342${path}`}
+            src={`${import.meta.env.VITE_TMDB_IMAGE_URL}/w342${path}`}
             alt=""
             objectFit="cover"
             objectPosition="center"

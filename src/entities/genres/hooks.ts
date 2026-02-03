@@ -25,7 +25,7 @@ export function useGenresPosters() {
                     // 3. Теперь берем 4 случайных из перемешанного списка
                     const posters = shuffled
                         .slice(0, 4)
-                        .map((movie) => `https://image.tmdb.org/t/p/w300${movie.poster_path}`);
+                        .map((movie) => `${import.meta.env.VITE_TMDB_IMAGE_URL}/w300${movie.poster_path}`);
 
                     return {
                         ...genre,
