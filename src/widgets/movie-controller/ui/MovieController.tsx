@@ -1,4 +1,4 @@
-import { Carousel } from "@/shared/ui";
+import { CardsSkeleton, Carousel } from "@/shared/ui";
 import { MovieCard } from "@/shared/ui";
 import { useNowPlayingMovies, usePopularMovies } from "@/entities/movie/hooks";
 
@@ -13,11 +13,13 @@ export const MovieController = ({ type }: MovieControllerProps) => {
         now_playing: useNowPlayingMovies(),
     };
 
-    const { data } = queryMap[type];
+    const { data, isLoading } = queryMap[type];
     const movies = data?.results || [];
     return (
         <Carousel
             data={movies}
+            isLoading={isLoading}
+            renderSkeleton={() => <CardsSkeleton />}
             renderItem={(movie) => (
                 <MovieCard
                     key={movie.id}

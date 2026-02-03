@@ -5,13 +5,25 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@/shared/ui/icons";
 export interface CarouselProps<T> {
     data: T[];
     renderItem: (item: T, index: number) => React.ReactNode;
+    isLoading?: boolean;
+    skeletonCount?: number;
+    renderSkeleton?: (index: number) => React.ReactNode;
     heading?: string
     subtitle?: string
 }
 
 
 
-export const Carousel = <T,>({ data, renderItem, heading, subtitle }: CarouselProps<T>) => {
+
+export const Carousel = <T,>({
+    data,
+    renderItem,
+    heading,
+    subtitle,
+    isLoading = false,
+    skeletonCount = 5,
+    renderSkeleton
+}: CarouselProps<T>) => {
     const slides = useBreakpointValue({
         base: 1.7,
         sm: 2,
@@ -23,11 +35,14 @@ export const Carousel = <T,>({ data, renderItem, heading, subtitle }: CarouselPr
         md: false
     }) || false;
 
-    if (!data || !Array.isArray(data) || data.length === 0) {
-        return null;
-    }
+    const items = isLoading
+        ? Array.from({ length: skeletonCount })
+        : (Array.isArray(data) ? data : []);
+
+    const hasData = items.length > 0;
+
     return (
-        <ChakraCarousel.Root slideCount={data.length} allowMouseDrag slidesPerPage={slides} w="full">
+        <ChakraCarousel.Root slideCount={hasData ? items.length : 1} allowMouseDrag slidesPerPage={slides} w="full">
             <Box display="flex" alignItems="center" justifyContent="space-between">
                 <Box mb={{ base: "40px", md: "60px" }}>
                     <Heading textStyle="h2">{heading}</Heading>
@@ -59,16 +74,19 @@ export const Carousel = <T,>({ data, renderItem, heading, subtitle }: CarouselPr
                     </Box>}
             </Box>
             <ChakraCarousel.ItemGroup>
-                {data.map((item, index) => (
+                {items.map((item, index) => (
                     <ChakraCarousel.Item key={index} index={index}>
-                        {renderItem(item, index)}
+                        {isLoading && renderSkeleton
+                            ? renderSkeleton(index)
+                            : renderItem(item as T, index)
+                        }
                     </ChakraCarousel.Item>
                 ))}
             </ChakraCarousel.ItemGroup>
             {
-                isMobile && <Box bg="bg.global" rounded="full" mr={{ base: 4 }}>
+                isMobile && hasData && (<Box bg="bg.global" rounded="full" mr={{ base: 4 }}>
                     <ChakraCarousel.IndicatorGroup gap="0" w="full" display="flex">
-                        {Array.from({ length: data.length }, (_, index) => (
+                        {Array.from({ length: items.length }, (_, index) => (
                             <ChakraCarousel.Indicator
                                 key={index}
                                 index={index}
@@ -80,8 +98,9 @@ export const Carousel = <T,>({ data, renderItem, heading, subtitle }: CarouselPr
                             />
                         ))}
                     </ChakraCarousel.IndicatorGroup>
-                </Box>
+                </Box>)
             }
         </ChakraCarousel.Root >
     )
 }
+

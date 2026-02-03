@@ -9,8 +9,8 @@ import {
 // Определяем кастомный конфиг (тут твои цвета, компоненты и т.д.)
 const customConfig = defineConfig({
   conditions: {
-    light: "[data-theme='light'] &",
     dark: "[data-theme='dark'] &",
+    light: "[data-theme='light'] &",
   },
   theme: {
     tokens: {

@@ -1,12 +1,26 @@
-import { Box, Image, SimpleGrid } from "@chakra-ui/react";
+import { Box, Image, SimpleGrid, Skeleton } from "@chakra-ui/react";
 import { useHeroPosters } from "../hooks";
 
 export const HeroPosters = () => {
   const { data: posters, isLoading } = useHeroPosters();
 
-  if (isLoading) return <Box h="100vh" bg="bg.global" />;
-
-  return (
+  return isLoading ? (<SimpleGrid columns={[3, 9]}
+    gap={{ base: "2", md: "5" }}>
+    {Array.from({ length: 36 }).map((_, i) => (
+      <Box key={i} borderRadius="12px" overflow="hidden" aspectRatio="2/3">
+        <Skeleton
+          h="full"
+          w="full"
+          variant="shine"
+          css={{
+            "--start-color": "var(--chakra-colors-red-800)",
+            "--end-color": "var(--chakra-colors-red-950)",
+          }}
+        />
+      </Box>
+    ))}
+  </SimpleGrid>
+  ) : (
     <SimpleGrid
       columns={[3, 9]}
       gap={{ base: "2", md: "5" }}

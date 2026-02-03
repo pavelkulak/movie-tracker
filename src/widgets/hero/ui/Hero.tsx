@@ -20,7 +20,7 @@ export const Hero = () => {
         position="relative"
         height={{ base: "500px", lg: "700px", xl: "860px" }}
         overflow="hidden"
-      // maxW="1920px"
+        w="full"
       >
         <HeroPosters />
 

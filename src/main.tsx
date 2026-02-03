@@ -6,6 +6,7 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { LanguageProvider } from "@/shared/i18n/";
 import { router } from "@/app/router";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -13,6 +14,7 @@ createRoot(document.getElementById("root")!).render(
       <LanguageProvider>
         <Chakra>
           <RouterProvider router={router} />
+          <ReactQueryDevtools initialIsOpen={false} />
         </Chakra>
       </LanguageProvider>
     </QueryClientProvider>
