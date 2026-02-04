@@ -11,7 +11,7 @@ const MoviesByGenreLazy = lazy(() =>
 );
 
 const MoviesPageLasy = lazy(() =>
-  import("@/pages/movies/MoviesPage").then((module) => ({
+  import("@/pages/movies").then((module) => ({
     default: module.MoviesPage,
   }))
 );

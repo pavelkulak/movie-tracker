@@ -51,7 +51,7 @@ export const MovieCard = ({ image, vote_average, title }: MovieCardProps) => {
         mt={{ base: "10px", md: "15px" }}
         rounded="full"
         bg="bg.page"
-        p={{ base: "6px", xl: "10px" }}
+        p={{ base: "8px", xl: "10px" }}
         border="1px solid"
         borderColor="bg.partical"
       >
@@ -59,7 +59,7 @@ export const MovieCard = ({ image, vote_average, title }: MovieCardProps) => {
           allowHalf
           readOnly
           count={10}
-          size="sm"
+          size={{ base: "xs", md: "sm" }}
           value={Math.round(vote_average * 2) / 2}
           colorPalette="red"
         >

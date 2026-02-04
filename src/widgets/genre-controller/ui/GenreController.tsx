@@ -1,7 +1,7 @@
-import { Carousel } from "@/shared/ui";
-import { GenreCard } from "@/shared/ui";
+import { Carousel, CardsSkeleton, GenreCard } from "@/shared/ui";
 import { useGenresPosters } from "@/entities/genres/hooks";
-import { CardsSkeleton } from "@/shared/ui";
+import { useNavigate } from "react-router-dom"; // Добавляем навигацию
+import { Box } from "@chakra-ui/react";
 
 export const GenreController = ({
   heading,
@@ -11,6 +11,7 @@ export const GenreController = ({
   subtitle?: string;
 }) => {
   const { data, isLoading } = useGenresPosters();
+  const navigate = useNavigate();
 
   return (
     <Carousel
@@ -20,7 +21,16 @@ export const GenreController = ({
       isLoading={isLoading}
       renderSkeleton={() => <CardsSkeleton />}
       renderItem={(item) => (
-        <GenreCard genre={item.name} images={item.posters} />
+        <Box
+          onClick={() => navigate(`/genre/${item.id}`)}
+          cursor="pointer"
+          w="full"
+        >
+          <GenreCard
+            genre={item.displayName}
+            images={item.posters}
+          />
+        </Box>
       )}
     />
   );

@@ -1,78 +1,21 @@
 export const genres = [
-    {
-        "id": 28,
-        "name": "Action"
-    },
-    {
-        "id": 12,
-        "name": "Adventure"
-    },
-    {
-        "id": 16,
-        "name": "Animation"
-    },
-    {
-        "id": 35,
-        "name": "Comedy"
-    },
-    {
-        "id": 80,
-        "name": "Crime"
-    },
-    {
-        "id": 99,
-        "name": "Documentary"
-    },
-    {
-        "id": 18,
-        "name": "Drama"
-    },
-    {
-        "id": 10751,
-        "name": "Family"
-    },
-    {
-        "id": 14,
-        "name": "Fantasy"
-    },
-    {
-        "id": 36,
-        "name": "History"
-    },
-    {
-        "id": 27,
-        "name": "Horror"
-    },
-    {
-        "id": 10402,
-        "name": "Music"
-    },
-    {
-        "id": 9648,
-        "name": "Mystery"
-    },
-    {
-        "id": 10749,
-        "name": "Romance"
-    },
-    {
-        "id": 878,
-        "name": "Science Fiction"
-    },
-    {
-        "id": 10770,
-        "name": "TV Movie"
-    },
-    {
-        "id": 53,
-        "name": "Thriller"
-    },
-    {
-        "id": 10752,
-        "name": "War"
-    },
-    {
-        "id": 37,
-        "name": "Western"
-    }
-]
+    { id: 28, key: "genres.action", name: "Action" },
+    { id: 12, key: "genres.adventure", name: "Adventure" },
+    { id: 16, key: "genres.animation", name: "Animation" },
+    { id: 35, key: "genres.comedy", name: "Comedy" },
+    { id: 80, key: "genres.crime", name: "Crime" },
+    { id: 99, key: "genres.documentary", name: "Documentary" },
+    { id: 18, key: "genres.drama", name: "Drama" },
+    { id: 10751, key: "genres.family", name: "Family" },
+    { id: 14, key: "genres.fantasy", name: "Fantasy" },
+    { id: 36, key: "genres.history", name: "History" },
+    { id: 27, key: "genres.horror", name: "Horror" },
+    { id: 10402, key: "genres.music", name: "Music" },
+    { id: 9648, key: "genres.mystery", name: "Mystery" },
+    { id: 10749, key: "genres.romance", name: "Romance" },
+    { id: 878, key: "genres.science_fiction", name: "Science Fiction" },
+    { id: 10770, key: "genres.tv_movie", name: "TV Movie" },
+    { id: 53, key: "genres.thriller", name: "Thriller" },
+    { id: 10752, key: "genres.war", name: "War" },
+    { id: 37, key: "genres.western", name: "Western" }
+];
