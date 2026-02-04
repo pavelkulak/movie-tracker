@@ -3,6 +3,13 @@ import { RootLayout } from "./layout";
 import { HomePage } from "@/pages/home/ui/HomePage";
 import { lazy, Suspense } from "react";
 
+
+const MoviesByGenreLazy = lazy(() =>
+  import("@/pages/movies-by-genre/MoviesByGenre").then((module) => ({
+    default: module.MoviesByGenre,
+  }))
+);
+
 const MoviesPageLasy = lazy(() =>
   import("@/pages/movies/MoviesPage").then((module) => ({
     default: module.MoviesPage,
@@ -15,16 +22,16 @@ const SupportPageLasy = lazy(() =>
   }))
 );
 
-// Вспомогательный компонент для обертки, чтобы не дублировать Suspense
 const Loadable = (Component: React.ComponentType) => (props: any) =>
-  (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Component {...props} />
-    </Suspense>
-  );
+(
+  <Suspense fallback={<div>Loading...</div>}>
+    <Component {...props} />
+  </Suspense>
+);
 
 const MoviesPage = Loadable(MoviesPageLasy);
 const SupportPage = Loadable(SupportPageLasy);
+const MoviesByGenre = Loadable(MoviesByGenreLazy);
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +39,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/movies", element: <MoviesPage /> },
+      { path: "/genre/:genreId", element: <MoviesByGenre /> },
       { path: "/support", element: <SupportPage /> },
     ],
   },

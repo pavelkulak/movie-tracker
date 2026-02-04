@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useLanguage } from "@/shared/i18n/LanguageContext";
 import {
   fetchPopularMovies,
@@ -9,6 +9,7 @@ import {
   fetchMovieVideos,
   fetchHeroPosters,
   fetchNowPlayingMovies,
+  fetchDiscoverMovies,
 } from "./api";
 import { shuffleArray } from "@/shared/lib";
 
@@ -110,5 +111,18 @@ export function useMovieVideos(id: number) {
     queryKey: ["movie", id, "videos", language],
     queryFn: () => fetchMovieVideos(id, language),
     enabled: !!id,
+  });
+}
+
+
+//discover
+export function useDiscoverMovies(genreId: string, page: number) {
+  const { language } = useLanguage();
+
+  return useQuery({
+    queryKey: ["movies", "discover", genreId, page],
+    queryFn: () => fetchDiscoverMovies(genreId, page, language),
+    placeholderData: keepPreviousData,
+    enabled: !!genreId,
   });
 }

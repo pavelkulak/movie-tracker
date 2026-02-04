@@ -8,8 +8,8 @@ export const ru = {
   movies: {
     title: "Фильмы",
     genres: "Жанры",
-    tranding: "Популярные",
-    new: "Новинки",
     popular: "Популярные",
+    now_playing: "В прокате",
+    top_rated: "Лучшие",
   }
 }

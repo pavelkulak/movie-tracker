@@ -18,7 +18,7 @@ const LanguageContext = createContext<LanguageContextProps | undefined>(
 );
 
 export const LanguageProvider = ({ children }: PropsWithChildren) => {
-  const [language, setLanguage] = useState<Language>("en");
+  const [language, setLanguage] = useState<Language>("ru");
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>

@@ -1,0 +1,1 @@
+export { MovieSkeleton } from "./MovieSkeleton";

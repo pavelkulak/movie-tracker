@@ -92,3 +92,20 @@ export function fetchMovieVideos(
     `${API_URL}/movie/${id}/videos?api_key=${API_KEY}&language=${language}`
   );
 }
+
+// discover
+
+export const fetchDiscoverMovies = async (
+  genreId: string,
+  page: number = 1,
+  lang: string
+): Promise<MovieListResponse> => {
+  const params = new URLSearchParams({
+    api_key: API_KEY,
+    with_genres: genreId,
+    page: String(page),
+    language: lang,
+    sort_by: 'popularity.desc'
+  });
+  return request(`${API_URL}/discover/movie?${params}`)
+}

@@ -5,3 +5,4 @@ export * from "./MovieCard";
 export * from "./DeviceCard";
 export * from "./Accordion";
 export * from "./CardsSkeleton";
+export * from "./MovieSkeleton";
