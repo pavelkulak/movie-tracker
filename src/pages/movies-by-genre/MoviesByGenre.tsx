@@ -1,7 +1,7 @@
 import { Box, Heading, VStack, Image, SimpleGrid, Text, IconButton, HStack, } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { useDiscoverMovies } from "@/entities/movie/hooks";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useGenreDisplayName } from "@/entities/genres/helper"
 import { ArrowLeftIcon, ArrowRightIcon } from "@/shared/ui/icons";
 import { MovieSkeleton } from "@/shared/ui/MovieSkeleton";
@@ -24,6 +24,10 @@ export const MoviesByGenre = () => {
     setPage((prev) => prev + 1);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  useEffect(() => {
+    setPage(1);
+  }, [genreId]);
 
   return (
     <VStack
