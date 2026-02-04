@@ -105,6 +105,13 @@ const customConfig = defineConfig({
           fontWeight: "600",
         },
       },
+      h4: {
+        value: {
+          fontSize: { base: "16px", lg: "18px", xl: "20px" },
+          lineHeight: "1.3",
+          fontWeight: "600",
+        },
+      },
     },
 
     semanticTokens: {
@@ -122,10 +129,13 @@ const customConfig = defineConfig({
             value: { _light: "{colors.gray.60}", _dark: "{colors.dark.12}" },
           },
           page: {
-            value: { _light: "{colors.white}", _dark: "{colors.dark.6}" },
+            value: { _light: "{colors.white}", _dark: "{colors.dark.8}" },
           },
           partical: {
             value: { _light: "{colors.dark.6}", _dark: "{colors.dark.15}" },
+          },
+          primary: {
+            value: { _light: "#ffffff", _dark: "#000000" },
           },
         },
         icon: {

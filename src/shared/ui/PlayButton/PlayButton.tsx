@@ -1,15 +1,14 @@
-import { Button, Text } from "@chakra-ui/react";
+import { Button, Text, type ButtonProps } from "@chakra-ui/react";
 import { PlayIcon } from "./PlayIcon";
 import { locales } from "./locales";
 import { useTranslate } from "@/shared/i18n";
 
 type PlayVariant = "play" | "start";
 
-type PlayButtonProps = {
+interface PlayButtonProps extends Omit<ButtonProps, "variant"> {
   variant: PlayVariant;
-};
-
-export const PlayButton = ({ variant }: PlayButtonProps) => {
+}
+export const PlayButton = ({ variant, ...props }: PlayButtonProps) => {
   const t = useTranslate(locales);
 
   return (
@@ -21,6 +20,7 @@ export const PlayButton = ({ variant }: PlayButtonProps) => {
       py={{ base: "3.5", xl: "4.5" }}
       h="auto"
       _hover={{ transform: "scale(1.05)" }}
+      {...props}
     >
       <PlayIcon />
       <Text textStyle="buttons">{t(variant)}</Text>

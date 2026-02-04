@@ -10,34 +10,41 @@ async function request<T>(url: string): Promise<T> {
   return res.json();
 }
 
-
-
 // ---------------- popular ----------------
 export function fetchPopularMovies(
-  language: string,
+  language: string
 ): Promise<MovieListResponse> {
   return request(
-    `${API_URL}/movie/popular?api_key=${API_KEY}&language=${language}`,
+    `${API_URL}/movie/popular?api_key=${API_KEY}&language=${language}`
+  );
+}
+
+// top rated movies
+export function fetchTopRatedMovies(
+  language: string
+): Promise<MovieListResponse> {
+  return request(
+    `${API_URL}/movie/top_rated?api_key=${API_KEY}&language=${language}`
   );
 }
 
 export function fetchNowPlayingMovies(
-  language: string,
+  language: string
 ): Promise<MovieListResponse> {
   return request(
-    `${API_URL}/movie/now_playing?api_key=${API_KEY}&language=${language}`,
+    `${API_URL}/movie/now_playing?api_key=${API_KEY}&language=${language}`
   );
 }
 
-// ---------------- popular posters ----------------
+// ---------------- popular posters для HeroSection ----------------
 
 export const fetchHeroPosters = async (pages = 2): Promise<string[]> => {
   const requests = [];
   for (let i = 1; i <= pages; i++) {
     requests.push(
       fetch(`${API_URL}/movie/popular?api_key=${API_KEY}&page=${i}`).then(
-        (res) => res.json() as Promise<MovieListResponse>,
-      ),
+        (res) => res.json() as Promise<MovieListResponse>
+      )
     );
   }
 
@@ -52,36 +59,36 @@ export const fetchHeroPosters = async (pages = 2): Promise<string[]> => {
 // ---------------- search ----------------
 export function searchMovies(
   query: string,
-  language: string,
+  language: string
 ): Promise<MovieListResponse> {
   return request(
-    `${API_URL}/search/movie?api_key=${API_KEY}&query=${query}&language=${language}`,
+    `${API_URL}/search/movie?api_key=${API_KEY}&query=${query}&language=${language}`
   );
 }
 
 // ---------------- details ----------------
 export function fetchMovieById(id: number, language: string): Promise<Movie> {
   return request(
-    `${API_URL}/movie/${id}?api_key=${API_KEY}&language=${language}`,
+    `${API_URL}/movie/${id}?api_key=${API_KEY}&language=${language}`
   );
 }
 
 // ---------------- credits ----------------
 export function fetchMovieCredits(
   id: number,
-  language: string,
+  language: string
 ): Promise<Credits> {
   return request(
-    `${API_URL}/movie/${id}/credits?api_key=${API_KEY}&language=${language}`,
+    `${API_URL}/movie/${id}/credits?api_key=${API_KEY}&language=${language}`
   );
 }
 
 // ---------------- videos ----------------
 export function fetchMovieVideos(
   id: number,
-  language: string,
+  language: string
 ): Promise<MovieVideos> {
   return request(
-    `${API_URL}/movie/${id}/videos?api_key=${API_KEY}&language=${language}`,
+    `${API_URL}/movie/${id}/videos?api_key=${API_KEY}&language=${language}`
   );
 }

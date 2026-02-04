@@ -15,7 +15,7 @@ export const Header = () => {
       zIndex="10"
       as="header"
       pt={{
-        base: "10",
+        base: "4",
         md: "6",
         lg: "8",
       }}

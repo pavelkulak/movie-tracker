@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useLanguage } from "@/shared/i18n/LanguageContext";
 import {
   fetchPopularMovies,
+  fetchTopRatedMovies,
   searchMovies,
   fetchMovieById,
   fetchMovieCredits,
@@ -9,6 +10,7 @@ import {
   fetchHeroPosters,
   fetchNowPlayingMovies,
 } from "./api";
+import { shuffleArray } from "@/shared/lib";
 
 export function usePopularMovies() {
   const { language } = useLanguage();
@@ -16,6 +18,22 @@ export function usePopularMovies() {
   return useQuery({
     queryKey: ["movies", "popular", language],
     queryFn: () => fetchPopularMovies(language),
+    staleTime: 1000 * 60 * 60 * 12,
+    gcTime: 1000 * 60 * 60 * 25,
+    refetchOnWindowFocus: false,
+    // ТРАНСФОРМАЦИЯ ДАННЫХ:
+    select: (data) => ({
+      ...data,
+      results: shuffleArray(data.results || []),
+    }),
+  });
+}
+
+export function useTopRatedMovies() {
+  const { language } = useLanguage();
+  return useQuery({
+    queryKey: ["movies", "top-rated", language],
+    queryFn: () => fetchTopRatedMovies(language),
     staleTime: 1000 * 60 * 60 * 12, // 12 часов
     gcTime: 1000 * 60 * 60 * 25,
     refetchOnWindowFocus: false,
@@ -28,9 +46,14 @@ export function useNowPlayingMovies() {
   return useQuery({
     queryKey: ["movies", "now-playing", language],
     queryFn: () => fetchNowPlayingMovies(language),
-    staleTime: 1000 * 60 * 60 * 12, // 24 часа
+    staleTime: 1000 * 60 * 60 * 12,
     gcTime: 1000 * 60 * 60 * 25,
     refetchOnWindowFocus: false,
+    // ТРАНСФОРМАЦИЯ ДАННЫХ:
+    select: (data) => ({
+      ...data,
+      results: shuffleArray(data.results || []),
+    }),
   });
 }
 
