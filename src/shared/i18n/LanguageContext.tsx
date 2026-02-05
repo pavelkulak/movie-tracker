@@ -5,7 +5,7 @@ import {
   type PropsWithChildren,
 } from "react";
 
-// Типы выносим для использования в других файлах
+// Типы выносим для использования в других файлахs
 export type Language = "en" | "ru";
 
 interface LanguageContextProps {
