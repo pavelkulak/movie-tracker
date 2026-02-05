@@ -4,11 +4,13 @@ interface MovieCardProps {
   image: string;
   vote_average: number;
   title: string;
+  onClick?: () => void;
 }
 
-export const MovieCard = ({ image, vote_average, title }: MovieCardProps) => {
+export const MovieCard = ({ image, vote_average, title, onClick }: MovieCardProps) => {
   return (
     <Box
+      onClick={onClick}
       p={{ base: "20px", lg: "24px", xl: "30px" }}
       bg="bg.global"
       borderRadius="12px"

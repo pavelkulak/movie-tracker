@@ -84,14 +84,18 @@ export const HeroSlider = ({ type, genreId: propsGenreId, movieId: propsMovieId,
         </Carousel.ItemGroup>
 
         <Carousel.Context>
-          {(carousel) => (
-            <SlideContent
-              isMobile={isMobile}
-              title={items[carousel.page ?? 0]?.title}
-              overview={items[carousel.page ?? 0]?.overview}
-              onOpenVideo={onOpenVideo}
-            />
-          )}
+          {(carousel) => {
+            const currentItem = items[carousel.page ?? 0];
+            return (
+              <SlideContent
+                isMobile={isMobile}
+                title={currentItem?.title}
+                overview={currentItem?.overview}
+                id={currentItem?.id}
+                onOpenVideo={onOpenVideo}
+              />
+            );
+          }}
         </Carousel.Context>
 
         <SliderControls isMobile={isMobile} />

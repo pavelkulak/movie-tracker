@@ -1,5 +1,5 @@
 import { useBreakpointValue, HStack } from "@chakra-ui/react";
-import { ColorModeButton } from "@/shared/ui/color-mode/ColorMode";
+import { LanguageSwitcher } from "@/shared/ui";
 import { MobileMenu } from "./MobileMenu";
 import { Navbar } from "./Navbar";
 import { Logo } from "./icons/Logo";
@@ -31,13 +31,13 @@ export const Header = () => {
       <Logo />
       {isMobile ? (
         <HStack>
-          <ColorModeButton />
+          <LanguageSwitcher />
           <MobileMenu />
         </HStack>
       ) : (
         <>
           <Navbar />
-          <ColorModeButton />
+          <LanguageSwitcher />
         </>
       )}
     </HStack>

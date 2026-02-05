@@ -63,9 +63,10 @@ export function useNowPlayingMovies() {
 // ---------------- popular posters ----------------
 
 export const useHeroPosters = () => {
+  const { language } = useLanguage();
   return useQuery({
-    queryKey: ["movies", "hero-posters"],
-    queryFn: () => fetchHeroPosters(2),
+    queryKey: ["movies", "hero-posters", language],
+    queryFn: () => fetchHeroPosters(language, 2),
     staleTime: 1000 * 60 * 60 * 24, // 24 часа
     gcTime: 1000 * 60 * 60 * 25,
     refetchOnWindowFocus: false,
@@ -147,7 +148,7 @@ export function useDiscoverMovies(genreId: string, page: number) {
   const { language } = useLanguage();
 
   return useQuery({
-    queryKey: ["movies", "discover", genreId, page],
+    queryKey: ["movies", "discover", genreId, page, language],
     queryFn: () => fetchDiscoverMovies(genreId, page, language),
     placeholderData: keepPreviousData,
     enabled: !!genreId,

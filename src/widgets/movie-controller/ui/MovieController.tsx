@@ -6,12 +6,15 @@ import {
   useTopRatedMovies,
 } from "@/entities/movie/hooks";
 
+import { useNavigate } from "react-router-dom";
+
 interface MovieControllerProps {
   heading: string;
   type: "popular" | "now_playing" | "top_rated";
 }
 const TMDB_IMAGE_BASE = `${import.meta.env.VITE_TMDB_IMAGE_URL}/w500`;
 export const MovieController = ({ heading, type }: MovieControllerProps) => {
+  const navigate = useNavigate();
   const queryMap = {
     popular: usePopularMovies(),
     now_playing: useNowPlayingMovies(),
@@ -33,6 +36,7 @@ export const MovieController = ({ heading, type }: MovieControllerProps) => {
           key={movie.id}
           image={`${TMDB_IMAGE_BASE}${movie.poster_path}`}
           vote_average={movie.vote_average}
+          onClick={() => navigate(`/movie/${movie.id}`)}
         />
       )}
     />

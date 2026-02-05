@@ -8,3 +8,4 @@ export * from "./CardsSkeleton";
 export * from "./MovieSkeleton";
 export * from "./GenreMovieCard";
 export * from "./Pagination";
+export * from "./LanguageSwitcher/LanguageSwitcher";

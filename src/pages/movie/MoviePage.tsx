@@ -19,7 +19,7 @@ const TMDB_IMAGE_BASE = import.meta.env.VITE_TMDB_IMAGE_URL;
 export const MoviePage = () => {
   const t = useTranslate(locales);
   const { movieId } = useParams();
-  const [open, setOpen] = useState(false); // Замена useDisclosure
+  const [open, setOpen] = useState(false);
   const { data: movie, isLoading: isMovieLoading } = useMovie(Number(movieId));
   const { data: credits, isLoading: isCreditsLoading } = useMovieCredits(Number(movieId));
   const { data: reviews, isLoading: isReviewsLoading } = useMovieReviews(Number(movieId));

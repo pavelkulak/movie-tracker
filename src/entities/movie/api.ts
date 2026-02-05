@@ -38,11 +38,11 @@ export function fetchNowPlayingMovies(
 
 // ---------------- popular posters для HeroSection ----------------
 
-export const fetchHeroPosters = async (pages = 2): Promise<string[]> => {
+export const fetchHeroPosters = async (language: string, pages = 2): Promise<string[]> => {
   const requests = [];
   for (let i = 1; i <= pages; i++) {
     requests.push(
-      fetch(`${API_URL}/movie/popular?api_key=${API_KEY}&page=${i}`).then(
+      fetch(`${API_URL}/movie/popular?api_key=${API_KEY}&page=${i}&language=${language}`).then(
         (res) => res.json() as Promise<MovieListResponse>
       )
     );
