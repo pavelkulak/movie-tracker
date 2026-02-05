@@ -22,7 +22,7 @@ export const MoviesPage = () => {
     >
 
       <Box w="full">
-        <HeroSlider />
+        <HeroSlider type="popular" />
       </Box>
 
       <Box

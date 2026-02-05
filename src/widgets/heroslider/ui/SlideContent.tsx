@@ -5,9 +5,10 @@ interface Props {
   title?: string;
   overview?: string;
   isMobile?: boolean;
+  onOpenVideo?: () => void;
 }
 
-export const SlideContent = ({ title, overview, isMobile }: Props) => (
+export const SlideContent = ({ title, overview, isMobile, onOpenVideo }: Props) => (
   <Box
     position="absolute"
     bottom="10%"
@@ -21,12 +22,14 @@ export const SlideContent = ({ title, overview, isMobile }: Props) => (
       {title}
     </Heading>
     {!isMobile && overview && (
-      <Text textStyle="body" color="primary" mt="2">
-        {overview}
-      </Text>
+      <Box background="linear-gradient(to right, rgba(0,0,0,0.9) 10%, rgba(0,0,0,0.4) 60%)" borderRadius="10px" p="5px">
+        <Text textStyle="body" color="primary" mt="2" textAlign="center">
+          {overview}
+        </Text>
+      </Box>
     )}
     <Box pointerEvents="auto" mt="20px">
-      <PlayButton variant="play" />
+      <PlayButton variant="play" onClick={onOpenVideo} />
     </Box>
   </Box>
 );

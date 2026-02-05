@@ -6,3 +6,5 @@ export * from "./DeviceCard";
 export * from "./Accordion";
 export * from "./CardsSkeleton";
 export * from "./MovieSkeleton";
+export * from "./GenreMovieCard";
+export * from "./Pagination";

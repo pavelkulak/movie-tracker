@@ -1,4 +1,4 @@
-import type { Movie, Credits, MovieVideos, MovieListResponse } from "./types";
+import type { Movie, Credits, MovieVideos, MovieListResponse, MovieImages, MovieReviews } from "./types";
 
 const API_URL = import.meta.env.VITE_TMDB_API_URL;
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -93,19 +93,35 @@ export function fetchMovieVideos(
   );
 }
 
+//movie images
+
+export const fetchMovieImages = async (id: number, language: string): Promise<MovieImages> => {
+  return request(
+    `${API_URL}/movie/${id}/images?api_key=${API_KEY}&include_image_language=${language},en,null`
+  );
+}
+
+
 // discover
 
 export const fetchDiscoverMovies = async (
   genreId: string,
   page: number = 1,
-  lang: string
+  language: string
 ): Promise<MovieListResponse> => {
   const params = new URLSearchParams({
     api_key: API_KEY,
     with_genres: genreId,
     page: String(page),
-    language: lang,
+    language,
     sort_by: 'popularity.desc'
   });
   return request(`${API_URL}/discover/movie?${params}`)
 }
+
+// reviews
+export const fetchMovieReviews = async (id: number, language: string): Promise<MovieReviews> => {
+  return request(
+    `${API_URL}/movie/${id}/reviews?api_key=${API_KEY}&language=${language}`
+  );
+};

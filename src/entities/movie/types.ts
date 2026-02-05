@@ -2,7 +2,10 @@ export interface Movie {
   id: number;
   adult: boolean;
   backdrop_path: string;
-  genre_ids: number[];
+  genres: {
+    id: number;
+    name: string;
+  }[];
   original_language: string;
   original_title: string;
   overview: string;
@@ -13,6 +16,10 @@ export interface Movie {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  spoken_languages: {
+    iso_639_1: string;
+    name: string;
+  }[];
 }
 
 export interface MovieListResponse {
@@ -21,6 +28,22 @@ export interface MovieListResponse {
   total_pages: number;
   total_results: number;
 }
+
+export interface MovieImage {
+  aspect_ratio: number;
+  height: number;
+  iso_639_1: string | null;
+  file_path: string;
+  vote_average: number;
+  vote_count: number;
+  width: number;
+}
+
+export interface MovieImages {
+  backdrops: MovieImage[];
+  id: number;
+}
+
 
 export interface Trailer {
   id: string;
@@ -65,3 +88,18 @@ export interface Credits {
   crew: CrewMember[];
 }
 
+export interface Review {
+  id: number;
+  author: string;
+  content: string;
+  author_details: {
+    name: string;
+    username: string;
+    avatar_path: string | null;
+    rating: number;
+  };
+}
+export interface MovieReviews {
+  id: number;
+  results: Review[];
+}

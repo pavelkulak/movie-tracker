@@ -22,6 +22,12 @@ const SupportPageLasy = lazy(() =>
   }))
 );
 
+const MoviePageLazy = lazy(() =>
+  import("@/pages/movie/MoviePage").then((module) => ({
+    default: module.MoviePage,
+  }))
+);
+
 const Loadable = (Component: React.ComponentType) => (props: any) =>
 (
   <Suspense fallback={<div>Loading...</div>}>
@@ -29,6 +35,8 @@ const Loadable = (Component: React.ComponentType) => (props: any) =>
   </Suspense>
 );
 
+
+const MoviePage = Loadable(MoviePageLazy);
 const MoviesPage = Loadable(MoviesPageLasy);
 const SupportPage = Loadable(SupportPageLasy);
 const MoviesByGenre = Loadable(MoviesByGenreLazy);
@@ -39,6 +47,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/movies", element: <MoviesPage /> },
+      { path: "/movie/:movieId", element: <MoviePage /> },
       { path: "/genre/:genreId", element: <MoviesByGenre /> },
       { path: "/support", element: <SupportPage /> },
     ],

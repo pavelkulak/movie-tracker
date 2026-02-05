@@ -10,6 +10,8 @@ import {
   fetchHeroPosters,
   fetchNowPlayingMovies,
   fetchDiscoverMovies,
+  fetchMovieImages,
+  fetchMovieReviews,
 } from "./api";
 import { shuffleArray } from "@/shared/lib";
 
@@ -109,11 +111,36 @@ export function useMovieVideos(id: number) {
 
   return useQuery({
     queryKey: ["movie", id, "videos", language],
-    queryFn: () => fetchMovieVideos(id, language),
+    queryFn: async () => {
+      const data = await fetchMovieVideos(id, language);
+
+      if (data.results && data.results.length > 0) {
+        return data;
+      }
+
+      if (language === 'en') {
+        return data;
+      }
+
+      return fetchMovieVideos(id, 'en');
+    },
     enabled: !!id,
+    staleTime: 1000 * 60 * 60 * 24,
   });
 }
 
+
+export function useMovieImages(id: number) {
+  const { language } = useLanguage();
+
+  return useQuery({
+    queryKey: ["movie", id, "images", language],
+    queryFn: () => fetchMovieImages(id, language),
+    staleTime: 1000 * 60 * 60 * 24,
+    enabled: !!id,
+    select: (data) => data?.backdrops || [],
+  });
+}
 
 //discover
 export function useDiscoverMovies(genreId: string, page: number) {
@@ -124,5 +151,26 @@ export function useDiscoverMovies(genreId: string, page: number) {
     queryFn: () => fetchDiscoverMovies(genreId, page, language),
     placeholderData: keepPreviousData,
     enabled: !!genreId,
+  });
+}
+
+// reviews
+export function useMovieReviews(id: number) {
+  const { language } = useLanguage();
+
+  return useQuery({
+    queryKey: ["movie", id, "reviews", language],
+    queryFn: async () => {
+      // 1. Пытаемся получить отзывы на выбранном языке
+      const data = await fetchMovieReviews(id, language);
+
+      // 2. Если отзывов 0 и язык не английский — запрашиваем английские
+      if (data.results.length === 0 && language !== 'en') {
+        return fetchMovieReviews(id, 'en');
+      }
+
+      return data;
+    },
+    enabled: !!id,
   });
 }

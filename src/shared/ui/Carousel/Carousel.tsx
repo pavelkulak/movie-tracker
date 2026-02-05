@@ -76,8 +76,8 @@ export const Carousel = <T,>({
             <ChakraCarousel.ItemGroup>
                 {items.map((item, index) => (
                     <ChakraCarousel.Item key={index} index={index}>
-                        {isLoading && renderSkeleton
-                            ? renderSkeleton(index)
+                        {isLoading
+                            ? (renderSkeleton ? renderSkeleton(index) : null)
                             : renderItem(item as T, index)
                         }
                     </ChakraCarousel.Item>
