@@ -190,45 +190,46 @@ export const MoviePage = () => {
           </GridItem>
         </Grid>
       </Box>
-      Это происходит потому, что Dialog.Positioner в Chakra v3 по умолчанию может выравнивать контент по верхнему краю, а size="full" в сочетании с прозрачным фоном создает иллюзию «маленького» окна.
-
-      Чтобы сделать плеер крупным и строго по центру, нам нужно:
-
-      Явно задать alignItems="center" для позиционера.
-
-      Использовать ширину vw (viewport width) для контейнера видео.
-
-      Убрать лишние отступы Dialog.Body.
-
-      Исправленный код модалки (Центрированный и Крупный)
-      TypeScript
+      {/* Video Dialog */}
       <Dialog.Root
         open={open}
         onOpenChange={(e) => setOpen(e.open)}
-        size="full" // Используем full для мобильной адаптивности
+        placement="center"
+        motionPreset="scale"
       >
-        <Dialog.Backdrop bg="rgba(0, 0, 0, 0.95)" backdropFilter="blur(15px)" zIndex="1000" />
+        <Dialog.Backdrop
+          bg="blackAlpha.900"
+          backdropFilter="blur(25px)"
+          zIndex="1000"
+        />
 
+        {/* POSITIONER */}
         <Dialog.Positioner
           zIndex="1001"
           display="flex"
-          alignItems="center" // Центрирует по вертикали
-          justifyContent="center" // Центрирует по горизонтали
+          justifyContent="center"
+          alignItems="center"
+          px="16px"
+          py={{ base: "60px", md: "40px" }} // ← магия Netflix
         >
           <Dialog.Content
             bg="transparent"
             boxShadow="none"
-            p="0"
             border="none"
-            w="100vw" // Растягиваем на всю ширину экрана
-            maxW="1400px" // Но ограничиваем на очень больших мониторах
+            p="0"
+            w="full"
+            maxW="1200px"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            position="relative"
           >
-            {/* Кнопка закрытия — увеличили для удобства */}
+            {/* CLOSE */}
             <Dialog.CloseTrigger
               position="absolute"
-              top={{ base: "-50px", md: "0" }} // На мобилках выносим выше видео
-              right="4"
-              zIndex="1002"
+              top={{ base: "-50px", md: "-60px" }}
+              right="0"
+              asChild
             >
               <Button
                 variant="ghost"
@@ -236,35 +237,44 @@ export const MoviePage = () => {
                 _hover={{ bg: "whiteAlpha.200" }}
                 rounded="full"
                 size="lg"
+                minW="48px"
+                h="48px"
               >
-                <LuPlus style={{ transform: 'rotate(45deg)', width: '30px', height: '30px' }} />
+                <LuPlus
+                  style={{
+                    transform: "rotate(45deg)",
+                    width: "34px",
+                    height: "34px"
+                  }}
+                />
               </Button>
             </Dialog.CloseTrigger>
 
-            <Dialog.Body p={{ base: "2", md: "10" }} w="full">
-              {/* Контейнер видео */}
+            {/* VIDEO */}
+            <Dialog.Body p="0" w="full">
               <Box
                 position="relative"
-                pt="56.25%" // Соотношение 16:9
                 w="full"
+                pt="56.25%"
                 bg="black"
-                rounded={{ base: "md", md: "2xl" }}
+                rounded={{ base: "12px", md: "20px" }}
                 overflow="hidden"
-                boxShadow="0 0 100px rgba(0,0,0,0.5)"
+                boxShadow={{
+                  base: "none",
+                  md: "0 40px 120px rgba(0,0,0,0.9)"
+                }}
               >
                 {trailer?.key && (
                   <iframe
                     style={{
                       position: "absolute",
-                      top: 0,
-                      left: 0,
+                      inset: 0,
                       width: "100%",
                       height: "100%",
                       border: "none"
                     }}
-                    src={`https://www.youtube.com/embed/${trailer.key}?autoplay=1&rel=0&modestbranding=1&showinfo=0`}
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    src={`https://www.youtube.com/embed/${trailer.key}?autoplay=1&rel=0&modestbranding=1`}
+                    allow="autoplay; encrypted-media; picture-in-picture"
                     allowFullScreen
                   />
                 )}
