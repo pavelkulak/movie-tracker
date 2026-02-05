@@ -10,8 +10,11 @@ import { PlayButton } from "@/shared/ui/PlayButton";
 import { useTranslate } from "@/shared/i18n";
 import { locales } from "../locales";
 
+import { useNavigate } from "react-router-dom";
+
 export const Hero = () => {
   const t = useTranslate(locales);
+  const navigate = useNavigate();
   const isMobile = useBreakpointValue({ base: true, md: false });
 
   return (
@@ -53,7 +56,7 @@ export const Hero = () => {
         >
           {isMobile ? t("mpromo") : t("promo")}
         </Text>
-        <PlayButton variant="start" />
+        <PlayButton variant="start" onClick={() => navigate("/movies")} />
       </VStack>
     </VStack>
   );

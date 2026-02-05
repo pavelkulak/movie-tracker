@@ -17,7 +17,7 @@ export const SlideContent = ({ title, overview, isMobile, id, onOpenVideo }: Pro
     if (onOpenVideo) {
       onOpenVideo();
     } else if (id) {
-      navigate(`/movie/${id}`);
+      navigate(`/movie/${id}?autoplay=true`);
     }
   };
 

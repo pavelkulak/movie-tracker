@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useMovie, useMovieCredits, useMovieReviews, useMovieVideos } from "@/entities/movie/hooks";
 import {
   VStack, Box, Text, Grid, GridItem, Heading,
@@ -12,14 +12,24 @@ import { locales } from "./locales";
 import {
   LuCalendar, LuLanguages, LuStar, LuLayoutGrid, LuPlus, LuUser
 } from "react-icons/lu";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const TMDB_IMAGE_BASE = import.meta.env.VITE_TMDB_IMAGE_URL;
 
 export const MoviePage = () => {
   const t = useTranslate(locales);
   const { movieId } = useParams();
-  const [open, setOpen] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [open, setOpen] = useState(searchParams.get("autoplay") === "true");
+
+  // Убираем параметр autoplay из URL после открытия, чтобы при перезагрузке он не открывался снова
+  useEffect(() => {
+    if (searchParams.get("autoplay") === "true") {
+      const newParams = new URLSearchParams(searchParams);
+      newParams.delete("autoplay");
+      setSearchParams(newParams, { replace: true });
+    }
+  }, []);
   const { data: movie, isLoading: isMovieLoading } = useMovie(Number(movieId));
   const { data: credits, isLoading: isCreditsLoading } = useMovieCredits(Number(movieId));
   const { data: reviews, isLoading: isReviewsLoading } = useMovieReviews(Number(movieId));
