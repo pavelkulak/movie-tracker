@@ -275,11 +275,11 @@ export const MoviePage = () => {
                 }}
               >
                 {trailer?.key ? (
-                  <iframe
+                  <video
+                    controls
+                    autoPlay
                     style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: "none" }}
                     src={`https://109-107-178-253.sslip.io/api/trailer/${trailer.key}?autoplay=1`}
-                    allow="autoplay; encrypted-media; picture-in-picture"
-                    allowFullScreen
                   />
                 ) : (
                   <Box w="full" h="full" bg="gray.900" display="flex" alignItems="center" justifyContent="center">
