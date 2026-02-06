@@ -274,19 +274,17 @@ export const MoviePage = () => {
                   md: "0 40px 120px rgba(0,0,0,0.9)"
                 }}
               >
-                {trailer?.key && (
+                {trailer?.key ? (
                   <iframe
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      width: "100%",
-                      height: "100%",
-                      border: "none"
-                    }}
-                    src={`https://www.youtube.com/embed/${trailer.key}?autoplay=1&rel=0&modestbranding=1`}
+                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: "none" }}
+                    src={`https://109-107-178-253.sslip.io/api/trailer/${trailer.key}?autoplay=1`}
                     allow="autoplay; encrypted-media; picture-in-picture"
                     allowFullScreen
                   />
+                ) : (
+                  <Box w="full" h="full" bg="gray.900" display="flex" alignItems="center" justifyContent="center">
+                    <Text color="white">Trailer not available</Text>
+                  </Box>
                 )}
               </Box>
             </Dialog.Body>
